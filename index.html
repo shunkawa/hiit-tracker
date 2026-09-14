@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Hotel HIIT</title>
+<meta name="description" content="出張中の HIIT をワンタップで記録する">
+
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#f9f9f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d0d0d" media="(prefers-color-scheme: dark)">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Hotel HIIT">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="app">
+
+  <header class="head">
+    <h1 class="head__title">Hotel HIIT</h1>
+    <p class="head__date" id="today-label"></p>
+  </header>
+
+  <section class="today" id="today-card" aria-labelledby="today-state">
+    <p class="today__state" id="today-state" aria-live="polite">今日はまだ</p>
+    <button type="button" class="tap" id="tap" aria-pressed="false">
+      <span class="tap__mark" aria-hidden="true"></span>
+      <span class="tap__label" id="tap-label">HIIT した</span>
+    </button>
+    <button type="button" class="undo" id="undo" hidden>取り消す</button>
+  </section>
+
+  <section class="stats" aria-label="継続の数字">
+    <div class="tile tile--hero">
+      <div class="tile__value" id="stat-streak">0</div>
+      <div class="tile__label">連続日数</div>
+    </div>
+    <div class="tile">
+      <div class="tile__value" id="stat-best">0</div>
+      <div class="tile__label">最長連続</div>
+    </div>
+    <div class="tile">
+      <div class="tile__value" id="stat-30">0<span class="tile__unit">/30</span></div>
+      <div class="tile__label">直近30日</div>
+    </div>
+  </section>
+
+  <section class="card viz-root">
+    <h2 class="card__title">継続状況<span class="card__note" id="hm-range"></span></h2>
+
+    <div class="hm">
+      <div class="hm__months" id="hm-months" aria-hidden="true"></div>
+      <div class="hm__dows" id="hm-dows" aria-hidden="true"></div>
+      <div class="hm__grid" id="hm-grid" role="grid" aria-label="日ごとの実施状況。セルを押すと切り替わる"></div>
+    </div>
+
+    <div class="legend">
+      <span class="legend__item"><i class="swatch swatch--empty"></i>未実施</span>
+      <span class="legend__item"><i class="swatch swatch--done"></i>実施</span>
+      <span class="legend__hint">セルを押せば後から直せる</span>
+    </div>
+
+    <button type="button" class="linkish" id="toggle-table" aria-expanded="false">実施日を一覧で見る</button>
+    <div class="tablewrap" id="tablewrap" hidden>
+      <table class="table">
+        <caption class="visually-hidden">実施した日の一覧</caption>
+        <thead><tr><th scope="col">日付</th><th scope="col">曜日</th></tr></thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <details class="card card--details">
+    <summary class="card__title">データ</summary>
+    <p class="muted">記録はこの端末の中だけに保存される。ときどき書き出して残しておくこと。</p>
+    <p class="muted" id="offline-state">オフライン起動: 確認中</p>
+    <div class="row">
+      <button type="button" class="btn" id="export">書き出す（JSON）</button>
+      <button type="button" class="btn" id="import-open">読み込む</button>
+      <input type="file" id="import" accept="application/json,.json" hidden>
+    </div>
+    <button type="button" class="btn btn--danger" id="reset">全部消す</button>
+  </details>
+
+</main>
+
+<div class="tip" id="tip" role="tooltip" hidden></div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="app.js"></script>
+</body>
+</html>
