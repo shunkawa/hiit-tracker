@@ -1,4 +1,4 @@
-# Hotel HIIT
+# HIIT Tracker
 
 出張中に HIIT をやったかどうかを、ワンタップで残すだけのアプリです。
 iPhone のホーム画面から開いて、大きなボタンを押す。それだけ。
@@ -29,15 +29,26 @@ iPhone のホーム画面から開いて、大きなボタンを押す。それ�
 静的ファイルだけなので、リポジトリをそのまま配信できます。
 
 ```bash
-gh repo create hotel-hiit --private --source=. --push
+gh repo create hiit-tracker --private --source=. --push
 ```
 
 そのうえで GitHub の Settings > Pages で Source を `main` ブランチのルートに設定します。
-`https://<ユーザー名>.github.io/hotel-hiit/` で開けるようになります。
+`https://<ユーザー名>.github.io/hiit-tracker/` で開けるようになります。
 
 > Private リポジトリで Pages を使うには有料プランが必要です。
 > 無料プランなら `--public` にしてください。記録は端末内にしか無いので、
 > 公開されるのはコードだけです。
+
+> この Mac には `git-guard` が入っていて、**公開リポジトリへの push は拒否されます**
+> （`github.com/mckinsey` 配下だけが例外）。正当な理由があれば、監査ログに記録する
+> 形で許可されます。
+>
+> ```bash
+> GIT_GUARD_REASON="<10文字以上の理由>" git push
+> ```
+>
+> また `git push` が HTTP 403 で落ちる場合は、macOS キーチェーンの古い資格情報が
+> 原因です。`gh auth setup-git` を一度実行すれば直ります。
 
 ## ローカルで動かす
 

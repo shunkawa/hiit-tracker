@@ -1,9 +1,9 @@
 'use strict';
 
-/* Hotel HIIT — 「今日 HIIT をやったか」だけを残すアプリ。
+/* HIIT Tracker — 「今日 HIIT をやったか」だけを残すアプリ。
    保存先は localStorage ひとつ。日付はすべて端末のローカル日付で扱う。 */
 
-var STORE_KEY = 'hotel-hiit.v1';
+var STORE_KEY = 'hiit-tracker.v1';
 var WEEKS = 12;                 // ヒートマップに出す週数
 var DOW_LABELS = ['月', '火', '水', '木', '金', '土', '日'];
 var SHOW_DOW = [0, 2, 4];       // 月・水・金だけラベルを出す
@@ -303,7 +303,7 @@ document.getElementById('export').addEventListener('click', function () {
   var url = URL.createObjectURL(blob);
   var a = document.createElement('a');
   a.href = url;
-  a.download = 'hotel-hiit-' + dayKey(today()) + '.json';
+  a.download = 'hiit-tracker-' + dayKey(today()) + '.json';
   document.body.appendChild(a);
   a.click();
   a.remove();

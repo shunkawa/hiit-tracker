@@ -1,7 +1,7 @@
 /* オフラインで起動できるようにするだけの Service Worker。
    記録そのものは localStorage にあるので、ここではアセットしか扱わない。 */
 
-var CACHE = 'hotel-hiit-v1';
+var CACHE = 'hiit-tracker-v1';
 
 var ASSETS = [
   './',
